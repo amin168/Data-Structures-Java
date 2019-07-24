@@ -1,0 +1,145 @@
+package com.amin.loop;
+
+import com.amin.Queue;
+
+/*
+ * 循环队列，数组实现，有头索引和尾索引，如果是静态队列，需要浪费掉一个空间来判断是否已满(capacity + 1)
+*/
+@SuppressWarnings("unchecked")
+public class LoopQueueWithTail<E> implements Queue<E> {
+
+	private E[] elements;
+	private int front, tail;
+	private int size;
+
+	private static final int DEFAULT_CAPACITY = 10;
+
+	public LoopQueueWithTail() {
+		elements = (E[]) new Object[DEFAULT_CAPACITY + 1];
+		front = 0;
+		tail = 0;
+		size = 0;
+	}
+
+	@Override
+	public int size() {
+		return size;
+	}
+
+	@Override
+	public void clear() {
+		for (int i = 0; i < size; i++) {
+			elements[index(i)] = null;
+		}
+		size = 0;
+		front = 0;
+		tail = 0;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return front == tail;
+	}
+
+	@Override
+	public void enQueue(E e) {
+		ensureCapacity(size + 1);
+
+		elements[tail] = e;
+		tail = (tail + 1) % elements.length;
+		size++;
+	}
+
+	@Override
+	public E deQueue() {
+
+		E ret = elements[front];
+		elements[front] = null;
+
+		// 出队后
+		// front = (front + 1) % elements.length;
+		front = index(1);
+		size--;
+		
+		trim();
+
+		return ret;
+	}
+
+	@Override
+	public E front() {
+		return elements[front];
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(String.format("Queue: size = %d , capacity = %d\n", size, elements.length));
+		sb.append("front [");
+
+		for (int i = front; i != tail; i = (i + 1) % elements.length) {
+			sb.append(elements[i]);
+			if ((i + 1) % elements.length != tail)
+				sb.append(", ");
+		}
+
+		sb.append("] tail");
+
+		return sb.toString();
+	}
+
+	/*
+	 * 返回索引位置所在的真实索引值
+	 */
+	private int index(int index) {
+		// 尽量避免使用乘*、 除/、 模%、 浮点数运算，效率低下
+		/*
+		 * 假如元素有7个 假如front在0的位置，在0的位置入队，则表示要在-1的位置插入元素，所以front + index = -1，但是这样是错误的
+		 * 所以我们要加上7，则得出7-1=6，刚好就是在索引6的位置插入元素
+		 */
+		index += front;
+		if (index < 0) {
+			return index + elements.length;
+		}
+
+		return index % elements.length;
+		// return index - (element.length > index ? 0 : element.length);
+
+		// 已知n>=0， m>0
+		// n%m 等价于 n – (m > n ? 0 : m) 的前提条件： n < 2m
+		// return index - (element.length > index ? 0 : element.length);
+	}
+
+	private void ensureCapacity(int capacity) {
+		int oldCapacity = elements.length;
+		if (oldCapacity >= capacity)
+			return;
+
+		int newCapacity = capacity * 2; // oldCapacity + (oldCapacity >> 1);
+		E[] newElements = (E[]) new Object[newCapacity + 1];
+		for (int i = 0; i < size; i++) {
+			newElements[i] = elements[index(i)];
+		}
+		elements = newElements;
+
+		// 重置front
+		front = 0;
+		tail = size;
+	}
+	
+	private void trim() {
+		int oldCapacity = elements.length;
+		int newCapacity4 = oldCapacity / 4;
+		int newCapacity2 = oldCapacity / 2;
+		if (size == newCapacity4 && newCapacity2 != 0) {
+			E[] newElements = (E[]) new Object[newCapacity2 + 1];
+			for (int i = 0; i < size; i++) {
+				newElements[i] = elements[index(i)];
+			}
+			elements = newElements;
+			front = 0;
+			tail = size;
+		}
+	}
+
+}

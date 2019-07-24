@@ -99,6 +99,7 @@ public class ArrayList<E> extends AbstractList<E> {
 		if (oldCapacity >= capacity)
 			return;
 
+		// 新容量为旧容量的1.5倍
 		int newCapacity = oldCapacity * 2; // oldCapacity + (oldCapacity >> 1);
 		E[] newElements = (E[]) new Object[newCapacity];
 		for (int i = 0; i < size; i++) {
