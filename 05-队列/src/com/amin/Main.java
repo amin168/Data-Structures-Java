@@ -9,13 +9,13 @@ import com.amin.loop.LoopQueueWithoutSize;;
 public class Main {
 
 	public static void main(String[] args) {
-		// testQueue();
+		 testQueue();
 		// testDeque();
 		//testCircleQueue();
 		//testCircleDeque();
 		//testLoopQueueWithTail();
 		//testLoopQueueWithOutWasting();
-		testLoopQueueWithoutSize();
+		//testLoopQueueWithoutSize();
 	}
 
 	public static void testQueue() {
