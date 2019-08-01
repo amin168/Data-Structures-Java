@@ -93,6 +93,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 			parent.right = newNode;
 		else
 			parent.left = newNode;
+		size++;
 	}
 
 	public boolean contains(E element) {
