@@ -77,7 +77,7 @@ public class BST<E> extends BinaryTree<E> {
 	/**
 	 * 移除node之后的调整
 	 * 
-	 * @param node 被删除的节点
+	 * @param node 被删除的几点 或者 用于取代被删除节点的子节点
 	 */
 	protected void afterRemove(Node<E> node) {
 
@@ -107,23 +107,29 @@ public class BST<E> extends BinaryTree<E> {
 		}
 
 		// 删除node节点（node的度必然是1或者0）
-		Node<E> child = node.left != null ? node.left : node.right;
+		Node<E> replacement = node.left != null ? node.left : node.right;
 
-		if (child != null) { // node是度为1的节点
+		if (replacement != null) { // node是度为1的节点
 			// 更改parent的指向
-			child.parent = node.parent;
+			replacement.parent = node.parent;
 
 			// 更改parent的left、right指向
 			if (node.parent == null) { // node是度为1的节点，并且是根节点
-				root = child;
+				root = replacement;
 			} else if (node == node.parent.left) { // 如果要删除的是左子节点
-				node.parent.left = child;
+				node.parent.left = replacement;
 			} else { // node == node.parent.right
-				node.parent.right = child;
+				node.parent.right = replacement;
 			}
 
 			// 删除节点之后的处理，真正被删除的是node的前驱节点或后继节点
-			afterRemove(node);
+			// afterRemove(node, replacement);
+
+			// 这里为什么可以传replacement，因为上面replacement.parent = node.parent
+			// 所以AVL树是一直顺着parent去找
+			// 而红黑树
+			afterRemove(replacement);
+
 		} else if (node.parent == null) {
 			root = null; // node是叶子节点，并且node是root节点
 
@@ -132,9 +138,9 @@ public class BST<E> extends BinaryTree<E> {
 
 		} else { // node是叶子节点，但不是根节点，删除叶子节点
 			if (node == node.parent.right)
-				node.parent.right = null;
+				node.parent.right = null; // 把右边父节点指向node的那根线断掉
 			else // node == node.parent.left
-				node.parent.left = null;
+				node.parent.left = null; // 把左边父节点指向node的那根线断掉
 
 			// 删除节点之后的处理，真正被删除的是node的前驱节点或后继节点
 			afterRemove(node);
