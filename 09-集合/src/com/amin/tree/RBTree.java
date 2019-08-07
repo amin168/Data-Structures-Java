@@ -80,8 +80,7 @@ public class RBTree<E> extends BBST<E> {
 
 	@Override
 	protected void afterRemove(Node<E> node) {
-		//  这里去除了replacement
-		
+
 		// 如果删除的是red节点，直接删除，不用任何操作
 //		if (isRed(node)) {
 //			return;
@@ -165,8 +164,8 @@ public class RBTree<E> extends BBST<E> {
 			if (isBlack(sibling.left) && isBlack(sibling.right)) {
 				// 兄弟节点没有1个红色子节点，父节点向下跟兄弟节点合并
 				boolean parentBlack = isBlack(parent);
-				red(sibling);
 				black(parent);
+				red(sibling);
 				if (parentBlack) {
 					afterRemove(parent);
 				}
@@ -186,7 +185,6 @@ public class RBTree<E> extends BBST<E> {
 		}
 	}
 
-//  这里需要用到replacement
 //	protected void afterRemove(Node<E> node, Node<E> replacement) {
 //
 //		// 如果删除的是red节点，直接删除，不用任何操作

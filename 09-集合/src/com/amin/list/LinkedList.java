@@ -1,4 +1,4 @@
-package com.amin;
+package com.amin.list;
 
 // 双向循环链表
 public class LinkedList<E> extends AbstractList<E> {
