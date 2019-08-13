@@ -1,12 +1,14 @@
 package com.amin.set;
 
+import com.amin.map.HashMap;
 import com.amin.map.Map;
 import com.amin.map.TreeMap;
+import com.amin.set.Set.Visitor;
 
-public class TreeSet<E> implements Set<E> {
-
-	private TreeMap<E, Object> map = new TreeMap<>();
-
+public class HashSet<E> implements Set<E> {
+	private HashMap<E, Object> map = new HashMap<>();
+	
+	
 	@Override
 	public int size() {
 		return map.size();

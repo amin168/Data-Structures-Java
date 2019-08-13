@@ -1,11 +1,11 @@
 package com.amin.set;
 
+import com.amin.map.HashMap;
+import com.amin.map.LinkedHashMap;
 import com.amin.map.Map;
-import com.amin.map.TreeMap;
 
-public class TreeSet<E> implements Set<E> {
-
-	private TreeMap<E, Object> map = new TreeMap<>();
+public class LinkedHashSet<E> implements Set<E> {
+	private LinkedHashMap<E, Object> map = new LinkedHashMap<>();
 
 	@Override
 	public int size() {
