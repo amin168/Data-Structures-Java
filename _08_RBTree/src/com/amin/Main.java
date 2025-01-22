@@ -1,10 +1,10 @@
-package amin;
+package com.amin;
 
-import amin.printer.BinaryTrees;
-import amin.tree.AVLTree;
-import amin.tree.BinarySearchTree;
-import amin.tree.BinaryTree;
-import amin.tree.RBTree;
+import com.amin.printer.BinaryTrees;
+import com.amin.tree.AVLTree;
+import com.amin.tree.BinarySearchTree;
+import com.amin.tree.BinaryTree;
+import com.amin.tree.RBTree;
 
 public class Main {
     public static void main(String[] args) {

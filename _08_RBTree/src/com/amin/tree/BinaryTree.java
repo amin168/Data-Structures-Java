@@ -1,7 +1,7 @@
-package amin.tree;
+package com.amin.tree;
 
 
-import amin.printer.BinaryTreeInfo;
+import com.amin.printer.BinaryTreeInfo;
 
 import java.util.Comparator;
 import java.util.LinkedList;

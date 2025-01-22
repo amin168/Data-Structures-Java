@@ -1,4 +1,4 @@
-package amin.tree;
+package com.amin.tree;
 
 import java.util.Comparator;
 

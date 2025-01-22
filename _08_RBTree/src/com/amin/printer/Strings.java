@@ -1,4 +1,4 @@
-package amin.printer;
+package com.amin.printer;
 
 public class Strings {
 	public static String repeat(String string, int count) {
