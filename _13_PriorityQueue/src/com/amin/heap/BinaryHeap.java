@@ -1,4 +1,5 @@
-package amin.heap;
+package com.amin.heap;
+
 
 import com.amin.printer.BinaryTreeInfo;
 

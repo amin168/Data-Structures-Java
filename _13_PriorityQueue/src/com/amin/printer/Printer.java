@@ -1,4 +1,4 @@
-package amin.printer;
+package com.amin.printer;
 
 public abstract class Printer {
 	/**

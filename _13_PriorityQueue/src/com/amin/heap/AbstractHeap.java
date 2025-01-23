@@ -1,4 +1,4 @@
-package amin.heap;
+package com.amin.heap;
 
 import java.util.Comparator;
 

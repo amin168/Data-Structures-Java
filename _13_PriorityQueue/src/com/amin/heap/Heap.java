@@ -1,4 +1,4 @@
-package amin.heap;
+package com.amin.heap;
 
 public interface Heap<E> {
     int size();	// 元素的数量
