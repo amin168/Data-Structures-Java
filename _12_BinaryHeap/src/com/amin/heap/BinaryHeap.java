@@ -87,8 +87,8 @@ public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
         //    siftUp(i);
         //}
 
-        // 自下而上的下滤
-        // size/2 -1
+        // 自下而上的下滤，效率比较高
+        // size/2 -1 -> 最后一个非叶子节点
         for (int i = (size >> 1) - 1; i >= 0; i--) {
             siftDown(i);
         }
@@ -136,13 +136,11 @@ public class BinaryHeap<E> extends AbstractHeap<E> implements BinaryTreeInfo {
 
             // 右子节点
             int rightIndex = childIndex + 1;
-            E right = elements[rightIndex];
 
             // 选出左右子节点最大的那个
             // rightIndex < size 证明索引在数组的合理范围之内
-            if (rightIndex < size && compare(right, child) > 0) {
-                childIndex = rightIndex;
-                child = right;
+            if (rightIndex < size && compare(elements[rightIndex], child) > 0) {
+                child = elements[childIndex = rightIndex];
             }
 
             if (compare(element, child) >= 0) break;
