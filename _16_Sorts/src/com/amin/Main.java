@@ -8,9 +8,10 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        Integer[] array = {7, 3, 5, 8, 6, 7, 4, 5};
+//        Integer[] array = {7, 3, 5, 8, 6, 7, 4, 5};
 //        Integer[] array = Integers.tailAscOrder(1,10, 5);
 
+        Integer[] array = Integers.random(30000, 1, 30000);
 
         testSorts(array,
 //                new BubbleSort1(),
@@ -18,9 +19,12 @@ public class Main {
 //                new BubbleSort3(),
                 new SelectionSort(),
                 new HeapSort(),
-                new InsertionSort1(),
-                new InsertionSort2(),
-                new InsertionSort3());
+//                new InsertionSort1(),
+//                new InsertionSort2(),
+//                new InsertionSort3(),
+                new MergeSort(),
+                new QuickSort(),
+                new ShellSort());
     }
 
     static void testSorts(Integer[] array, Sort... sorts) {
